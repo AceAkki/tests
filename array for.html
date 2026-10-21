@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>JavaScript Arrays</h1>
+
+<p id="demo"></p>
+<p id="2"></p>
+<script>
+
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fLen = fruits.length;
+console.log(fLen);
+let text = "<ol>";
+    console.log(text);
+for (let i = 0; 
+i < fLen; 
+i++) 
+{
+  text += "<li>" + fruits[i] + "</li>";
+  console.log(text);
+}
+
+console.log(text);
+document.getElementById("demo").innerHTML = text;
+
+// -------------------------------------------------------
+
+const fruits1 = ["Banana", "Orange", "Apple", "Mango"];
+console.log(fruits1);
+
+
+let text1 = "<div>";
+
+    console.log(text1);
+    fruits1.push("Lemon"); 
+
+fruits1.forEach(myFunction);
+text1 += "</div>";
+
+            console.log(text1);
+
+document.getElementById("2").innerHTML = text1;
+
+function myFunction(value) {
+    console.log(value);
+  text1 += "<b>" + value + "</b> <br>";
+  console.log(text1);
+}
+
+// -------------------------------------------------------
+
+let x = "";
+const myObj = {
+  name: "John",
+  age: 30,
+  cars: [
+    {name:"Ford", 
+    models:["Fiesta", "Focus", "Mustang","Fiesta", "Focus", "Mustang"]
+    },
+    {name:"BMW", 
+    models:["320", "X3", "X5"]
+    },
+    {name:"Fiat", 
+    models:["500", "Panda","2"]
+    }
+  ]
+}
+
+// document.write(myObj.name, "<br>");
+// document.write(myObj.age, "<br>");
+// document.write(myObj.cars, "<br>");
+// document.write(myObj, "<br>");
+// document.write("<br>");
+
+for (let i in myObj.cars) {
+  x += "<h2>" + myObj.cars[i].name + "</h2>";
+  x += "<h2>" + myObj.cars[i].models + "</h2>";
+ // document.write(myObj.cars[i].name, "<br>");
+
+
+  for (let j in myObj.cars[i].models) {
+ 
+    x += myObj.cars[i].models[j] + "<br>";
+  //  document.write(myObj.cars[i].models, "<br>");
+  }
+}
+
+
+
+document.write(x);
+
+document.write(myObj.cars.models);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+        }
+
+        .button {
+            background-color: #000;
+            color: #fff;
+            width: 150px;
+            padding: 10px;
+            border-radius: 10px;
+
+            text-align: center;
+            font-size: 25px;
+            font-family: "Source Code Pro", serif;
+
+        }
+    </style>
+
+    <title>Generate HTML</title>
+</head>
+
+<body>
+
+
+    <div class="container" id="two">
+        <div class="container">
+            <p style="font-size: 25px; margin-bottom:20px"> null </p>
+            <div class="button" onclick="test()">Generate</div>
+        </div>
+    </div>
+
+
+    <script>
+        let title = 'World Education Fair'
+
+        let cities = [
+            {
+                VenueCity: "Coimbatore",
+                VenueDate: "Saturday, 25th January",
+                VenueTime: "10:30 am to 5:00 pm",
+                VenueAdd: "Vivanta By Taj Surya, Race Course Road, Coimbatore",
+                Countries: ["UK", "USA", "Canada"],
+                MiscCountries: ["France", "Germany", "Singapore", "Malaysia"]
+            },
+
+            {
+                VenueCity: "Hyderabad",
+                VenueDate: "Sunday, 26th January",
+                VenueTime: "10:30 am to 5:00 pm",
+                VenueAdd: "Hyatt Place, Banjara Hills, Hyderabad",
+            },
+
+            {
+                VenueCity : "Vizag",
+                VenueDate : "Date - Tuesday, 28th January",
+                VenueTime : "10:30 am to 4:00 pm",
+                VenueAdd : "Fortune Inn Sree Kanya, Dwarakanagar, Vizag",
+
+            }
+
+            
+        ];
+
+        cities.forEach(city => {
+           console.log(formatCalDate(city));
+           console.log(makeGCalLink(city))
+        })
+
+        function formatCalDate(city) {
+            let year = 2025;
+            let month = ''
+            if (city.VenueDate.includes('January')) {month = '01'} else { month = '02'};
+            let day = city.VenueDate.replace(/[^0-9]/g, '')
+            let timeParts = city.VenueTime.split('to').map((part) => part.trim().replace(/[^0-9]/g, '')+ '00');          
+            //console.log(year+month+day);
+            let HH = '';
+            let SS = '';
+            let startTime = year+month+day+ 'T050000Z';
+            let endT =  '';
+            if (timeParts[1].includes('5')) {endT = 'T113000Z'} else { endT = 'T103000Z'}
+            let endTime = year+month+day+endT;
+            let formatted = startTime + '/' + endTime
+            return formatted; 
+        }
+
+
+        function makeGCalLink(city) {
+            var link;
+            link = 'http://www.google.com/calendar/event?action=TEMPLATE';
+            link += '&dates=' + encodeURIComponent(formatCalDate(city));
+            link += '&text=' + encodeURIComponent(title + ' - ' + city.VenueCity);
+            link += '&location=' + encodeURIComponent(city.VenueAdd);
+            link += '&details=' + encodeURIComponent();
+                        
+            return link
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
+

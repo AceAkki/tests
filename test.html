@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        header div {
+            display: flex;
+            gap: 10px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+        }
+
+        .grid {
+            background: hsl(36, 100%, 99%);
+            width: 100%;
+            max-width: 1500px;
+            height: 1000px;
+            display: grid;
+            gap: 1vw;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: auto;
+            /* grid-template-areas:
+                "hero hero hero hero aside2 aside2"
+                "hero hero hero hero aside2 aside2"
+                "hero hero hero hero aside2 aside2"
+                "hero hero hero hero aside2 aside2"
+                "aside3 aside3 aside4 aside4 aside5 aside5 "; */
+
+            grid-template-areas:
+                "hero hero aside2 aside2 aside2 aside2 aside5 aside5"
+                "hero hero aside2 aside2 aside2 aside2 aside5 aside5"
+                "hero hero aside3 aside3 aside3 aside3 aside5 aside5"
+                "hero hero aside4 aside4 aside4 aside4 aside6 aside6"
+
+        }
+
+
+        .item {
+            border: 2px solid #464545;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .grid .item:nth-child(1) {
+            grid-area: hero;
+        }
+
+        .grid .item:nth-child(2) {
+            grid-area: aside2;
+        }
+
+        .grid .item:nth-child(3) {
+            grid-area: aside3;
+        }
+
+        .grid .item:nth-child(4) {
+            grid-area: aside4;
+        }
+
+        .grid .item:nth-child(5) {
+            grid-area: aside5;
+        }
+
+        .grid .item:nth-child(6) {
+            grid-area: aside6;
+        }
+
+        .autocomplete-list {
+            position: absolute;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .autocomplete-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .autocomplete-item:hover {
+            background-color: #f0f0f0;
+        }
+
+
+        #List {
+            background-color: rgba(0, 0, 0, 0.50);
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        #List li {
+            list-style-type: none;
+            list-style-position: outside;
+            cursor: pointer;
+            padding-left: 10px;
+        }
+
+        #List li:focus,
+        #List li:hover {
+            background-color: #000;
+        }
+
+        table {
+            margin: 10px;
+        }
+
+        th,
+        td,
+        tr {
+            border: 2px solid black;
+            padding: 10px;
+        }
+
+        @media all and (max-width: 1280px) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-areas:
+                    "hero   hero   hero   hero"
+                    "hero   hero   hero   hero"
+                    "aside2 aside2 aside2 aside3"
+                    "aside4 aside4 aside5 aside5"
+                    "aside4 aside4 aside6 aside6";
+            }
+        }
+
+        @media all and (max-width: 834px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-areas:
+                    "hero   hero   hero"
+                    "hero   hero   hero"
+                    "aside2 aside2 aside2"
+                    "aside3 aside3 aside3"
+                    "aside4 aside4 aside4"
+                    "aside5 aside5 aside5"
+                    "aside6 aside6 aside6";
+            }
+        }
+    </style>
+
+    <title>Test</title>
+</head>
+
+<body>
+    <header id="header"> </header>
+
+
+
+    <div class="container" id="one">
+        <div class="container">
+            <div style="position: relative;">
+                <input type="text" id="courseInput" placeholder="Start typing a course..." />
+                <div id="autocompleteList" class="autocomplete-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="two">
+        <div class="container">
+            <!-- <div class="button" onclick="test()">Test</div> -->
+        </div>
+    </div>
+
+    <div class="grid" id="three">
+        <div class="item">
+            <p>One</p>
+
+        </div>
+        <div class="item">
+            <p>Two</p>
+        </div>
+        <div class="item">
+            <a
+                href="https://www.linkedin.com/cws/share/?url=https://unsplash.com/s/photos/computer-engineering?license=free">
+                <p>Three</p>
+            </a>
+
+        </div>
+        <div class="item">
+            <p>Four</p>
+        </div>
+        <div class="item">
+            <p>Five</p>
+        </div>
+        <div class="item">
+            <p>Six</p>
+        </div>
+    </div>
+
+    <div class="container" id="cero">
+        <div class="container">
+            <div class="inputWrap">
+                <input type="text" id="Input" placeholder="Search..">
+                <ul id="List"></ul>
+                <textarea id="Output"></textarea>
+                <button id="getID">Get ID</button>
+            </div>
+
+            <div class="inputWrap">
+                <input type="text" id="nNameInput" placeholder="Type Name">
+                <input type="number" id="nIdInput" placeholder="Type Id">
+                <button id="addName"> Add Name</button>
+            </div>
+
+            <div class="inputWrap">
+                <input type="text" id="dNameInput" placeholder="Type Name">
+                <button id="delName"> Delete Name</button>
+            </div>
+
+            <div class="dataTable">
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script type="IN/Share" data-url="https://www.linkedin.com"></script> -->
+
+
+    <script src="test.js"></script>
+
+    <script>
+        let array = ['One, UK', 'One, UK', 'One, UK', 'One, UK', 'One, UK', 'One, UK', 'One, USA']
+        array.forEach(t => {
+            let myArray = t.split(",");
+            //console.log(t)
+            console.log(myArray)
+        })
+
+    </script>
+
+</body>
+
+</html>
